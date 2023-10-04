@@ -11,27 +11,33 @@ export class AgeCalculatorComponent implements OnInit {
 
   ngOnInit() {
     this.birthdate = '';
-    this.age = 0;
+    this.years = 0;
+    this.months = 0;
+    this.days = 0;
   }
 
-  birthdate!: string;
-  age!: number;
+  birthdate: string = '';
+  years: number = 0;
+  months: number = 0;
+  days: number = 0;
 
   calculateAge() {
     if (this.birthdate) {
       const birthdateDate = new Date(this.birthdate);
       const today = new Date();
-
+  
       const ageInMilliseconds = today.getTime() - birthdateDate.getTime();
       const ageDate = new Date(ageInMilliseconds);
-
-      this.age = Math.abs(ageDate.getUTCFullYear() - 1970);
+  
+      this.years = ageDate.getFullYear() - 1970;
+      this.months = ageDate.getMonth();
+      this.days = ageDate.getDate() - 1;
+  
     } else {
-      this.age = 0;
+      this.birthdate = '';
+      this.years = 0;
+      this.months = 0;
+      this.days = 0;
     }
   }
-
 }
-
-
-
