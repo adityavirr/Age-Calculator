@@ -1,11 +1,19 @@
 <div class="age-calculator">
-    <h2>Age Calculator</h2>
-    <div class="input-container">
-      <label for="birthdate">Enter your birthdate:</label>
-      <input type="date" id="birthdate" [(ngModel)]="birthdate">
-    </div>
-    <button (click)="calculateAge()">Calculate Age</button>
-    <div *ngIf="years !== 0 || months !== 0 || days !== 0">
-      <p>Your age is {{ years }} years, {{ months }} months and {{ days }} days old.</p>
-    </div>
+  <h2>Age Calculator</h2>
+  <div class="input-container">
+    <mat-form-field>
+      <mat-label>Enter your birthdate:</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="birthdate" id="birthdate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
   </div>
+  <button mat-raised-button color="primary" (click)="calculateAge()">Calculate Age</button>
+  <div *ngIf="years !== undefined && months !== undefined && days !== undefined">
+    <mat-card>
+      <mat-card-content>
+        <p>Your age is {{ years }} years, {{ months }} months, and {{ days }} days old.</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
